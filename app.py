@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 import os
 from dotenv import load_dotenv
+import hashlib
 
 db = SQLAlchemy()
 app = Flask(__name__)
@@ -31,9 +32,12 @@ def index():
 @app.route('/register', methods = ["GET", "POST"])
 def register():
     if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+        hashed = hashlib.sha256(password.encode('UTF-8')).hexdigest()
         user = User(
-            email=request.form["email"],
-            password=request.form["password"],
+            email=email,
+            password=hashed
         )
         db.session.add(user)
         db.session.commit()
@@ -44,8 +48,10 @@ def register():
 def login():
     if request.method == "POST":
         found = db.one_or_404(db.select(User).filter_by(email=request.form["email"]))
-        if found.password == request.form["password"]:
-            return redirect(url_for("view"))
+        password = request.form["password"]
+        hashed = hashlib.sha256(password.encode('UTF-8')).hexdigest()
+        if found.password == hashed:
+            return redirect(url_for("index"))
     return render_template("login.html")
 
 @app.route('/view')
