@@ -4,32 +4,45 @@ import typing
 
 class correlatedSet(Dataset):
 
-    def __init__(self, corr_files:list, label_file:str, days: int):
+    def __init__(self, corr_files:list, label_file:str, days: int, seq_len: int):
         """
             Parameters:
             corr_files -> a list of files considered to be correlated
             label_file -> file which contains the optimal trading strategy
-            days  -> the amount of previous days to be included in the vector
+            days       -> the amount of previous days to be included in the vector
+            seq_len    -> length of each time sequence
         """
+        self.seq_len_ = seq_len
+        self.days_ = days
         self.data_ = self.extract_info(corr_files)
         self.label_ = self.extract_label(label_file)
-        self.days_ = days
         self.size_ = len(self.data_[0])
+        self.correlated_files_ = len(corr_files)
 
     def __len__(self) -> int:
-        return self.size_ - self.days_
+        print(self.size_)
+        return self.size_
 
     def __getitem__(self, index: int):
 
-        assert(index < self.size_ - self.days_) #Make sure index is not out of bounds
-        data = [comp_info[index:index+self.days_] for comp_info in self.data_] #NOT INCLUSIVE
-        label = self.label_[index]
+        index_start = index * self.seq_len_
+        index_end   = index * self.seq_len_ + self.days_
+        index_last  = (index+1) * (self.seq_len_) + self.days_
 
+
+        data = []
+        while(index_end != index_last):
+            data.append( [self.data_[i][index_start:index_end] for i in range(len(self.data_))] )
+            index_start+=1
+            index_end  +=1
+
+
+        label = self.label_[index * self.seq_len_ + self.days_]
         data = torch.tensor(data)
+        data = data.reshape(self.seq_len_, self.correlated_files_, self.days_)
 
         print(data)
         print(data.shape)
-
         return (data, label)
             
     def extract_info(self, files:list) -> list:
@@ -50,7 +63,12 @@ class correlatedSet(Dataset):
                     continue
 
                 line = line.split(',')
-                company_info.append( (line[2], line[4]) )
+                
+                # ADD VOLUME IN LATER
+                #if (line[2] == 'N/A'):
+                #    line[2] = 3000
+
+                company_info.append( float(line[4]) )
 
             file_data.append(company_info)
             f.close()
@@ -63,18 +81,21 @@ class correlatedSet(Dataset):
         for f_info in file_data:
             if len(f_info) < minimum:
                 minimum = len(f_info)
-
+    
+        print(minimum)
+        updated_size = ((minimum-self.days_) // self.seq_len_) + self.days_
         for i in range(len(file_data)):
-            file_data[i] = file_data[i][:minimum] #Chop off extra data
+            file_data[i] = file_data[i][:updated_size] #Chop off extra data
             file_data[i].reverse() #Oldest to Newest
 
-        return f_info
+
+        return file_data
 
     def extract_label(self, label_file: str) -> list:
         f = open(label_file, 'r')
-        lines = f.readlines()
+        line = f.readline()
         f.close()
-        return lines.split(' ')
+        return line.split(' ')
 
 
 
