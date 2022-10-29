@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{%block title%}Login{%endblock%}
+
+{%block body%}
+
+<form action="/register" method="post">
+    <p>Email</p>
+    <p><input type="text" name = "email"></p>
+    <p>Password</p>
+    <p><input type="text" name="password"></p>
+    <button><input type="submit" value = "Submit"></button>
+</form>
+
+<h1>Already Registered?</h1>
+<a href="login">Click Here</a>
+
+{%endblock%}
