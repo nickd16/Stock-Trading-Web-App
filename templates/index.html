@@ -2,24 +2,23 @@
 
 {%block title%}Home Page{%endblock%}
 {%block body%}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand ms-2" href="#">STOCKBOT</a>
+<nav class="navbar navbar-expand-lg navbar-dark green">
+    <a class="navbar-brand ms-2 text-light" href="#">STOCKBOT</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item mx-2 active">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link text-light" href="#">Home</a>
             </li>
             <li class="nav-item mx-2">
-                <a class="nav-link" href="#">Resources</a>
+                <a class="nav-link text-light" href="#">Resources</a>
             </li>
             <li class="nav-item mx-2">
-                <a class="nav-link" href="#">More Information</a>
+                <a class="nav-link text-light" href="#">More Information</a>
             </li>
         </ul>
-
         <div class="ms-auto me-2">
             <span class="nav-item">
                 <a href="login" class="btn btn-outline-light" role="button">Sign-in/Register</a>
@@ -28,59 +27,42 @@
     </div>  
 </nav>
 
-<section id="table" class = "grad">
-    <div class="container-sm my-1 mx-1"> 
-        <div class="row">
-            <div class="col-6">
-                <table class="table table-dark table-striped">
-                    <h2>Bot Stock Portfolio</h2>
-                    <h3>$124,188</h3>
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Symbol</th>
-                            <th scope="col">Cost</th>
-                            <th scope="col">Ratio</th>
-                            <th scope="col">Returns</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>----</td>
-                            <td>----</td>
-                            <td>----</td>
-                            <td>----</td>
-                        </tr>
-                    </tbody>
-                    <table class="table table-dark table-striped">
-                        <h2>Your Stock Portfolio</h2>
-                        <h3>$0</h3>
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Symbol</th>
-                                <th scope="col">Cost</th>
-                                <th scope="col">Ratio</th>
-                                <th scope="col">Returns</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>----</td>
-                                <td>----</td>
-                                <td>----</td>
-                                <td>----</td>
-                                
-                            </tr>
-                        </tbody>
+<div class="row d-flex justify-content-center align-items-center h-500 bgc">
+    <div class="col-xl-11 card-group justify-content-center">
+        <div class="card mt-4 mb-3 ms-3 me-3 grad border-white" style="height: 55rem; max-width: 70rem;">
+            <div class="card-header text-light">Filler</div>
+                <div class="card-body text-light">
+                  <h5 class="card-title">Danger card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
             </div>
-            <div class="col-6 move">
-                <img src="C:\Web Development Course\Stock_Project\Images\stocks.jpg" class="resize" alt="stocks">
+            <div class = "card mt-4 mb-3 ms-3 me-3 bgc border-white" style="height:14rem; max-width: 18rem">
+                <div class="card mb-3 grad mb-5 border-white" style="max-width: 18rem;">
+                    <div class="card-header text-light">Nike</div>
+                    <div class="card-body text-light">
+                    <img src="/static/images/nike.png" alt="">
+                      <h3 class="card-text"> $ 93.83</h3>
+                      <h6 class="card-text text-success">+3.29</h6>
+                    </div>
+                    <div class = "mb-4"></div>
+                    <div class="card mb-3 grad mt-5 mb-5 border-white" style="max-width: 18rem;">
+                        <div class="card-header text-light">Amazon</div>
+                        <div class="card-body text-light">
+                            <img src="/static/images/amazon-pay.png" alt="">
+                            <h3 class="card-text"> $ 103.41</h3>
+                            <h6 class="card-text text-danger">-7.55</h6>
+                        </div>
+                        <div class = "mb-4"></div>
+                        <div class="card mb-3 grad mt-5 mb-5 border-white" style="max-width: 18rem;">
+                            <div class="card-header text-light">Netflix</div>
+                            <div class="card-body text-light">
+                                <img src="/static/images/netflix.png" alt="">
+                                <h3 class="card-text"> $ 295.72</h3>
+                                <h6 class="card-text text-danger">-1.22</h6>
+                            </div>    
             </div>
-
-        </div>
     </div>
-</section>
+</div>
+
+
 {%endblock%}

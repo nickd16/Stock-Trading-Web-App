@@ -10,9 +10,21 @@
     right: 2%;
 }
 
+.bgc{
+    background: rgb(41, 59, 54);
+    background: url("images/stockgraph.jpg");
+}
+
+.green{
+    background: linear-gradient(to bottom, rgb(82,195,139), rgb(235,73,96));
+}
+.ftr{
+    background: linear-gradient(to bottom, rgb(235,73,96), rgb(82,195,139));
+}
+
 .grad {
     min-height: 100%;
-    background-image: linear-gradient(to bottom right, rgb(60, 34, 34), rgb(239, 179, 255), rgb(40, 138, 112));
+    background: rgb(19,23,34);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -20,8 +32,8 @@
 
 .gradient-custom-2 {
     background: #fccb90;
-    background: linear-gradient(to bottom right, rgb(60, 34, 34), rgb(239, 179, 255), rgb(40, 138, 112));
-    background: linear-gradient(to bottom right, rgb(60, 34, 34), rgb(239, 179, 255), rgb(40, 138, 112));
+    background: linear-gradient(to bottom, rgb(82,195,139), rgb(235,73,96));
+    background: linear-gradient(to bottom, rgb(82,195,139), rgb(235,73,96));
     }
     @media (min-width: 768px) {
         .gradient-form {
